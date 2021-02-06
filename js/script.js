@@ -1,14 +1,21 @@
-let general = $_('.form-group')
-let inputValue = $_('.input')
+const key = '69948d6972b54434aa6d695020c2fcb5';
 
-general.addEventListener('submit', evt => {
+let formGroup = $_('.form-group');
+let input = $_('.input');
+
+
+function showResult(evt) {
   evt.preventDefault();
+  let url = `https://newsapi.org/v2/everything?q=${input.value}&apiKey=${key}`;
 
-  fetch(`https://newsapi.org/v2/everything?q=${inputValue.value}&apiKey=f8576b990f454e098ec4dc89cc795bc6`)
-    .then(function (response) {
-      return response.json();
+  console.log(url);
+  fetch(url)
+    .then(res => {
+      return res.json();
     })
-    .then(function (myJson) {
-      console.log(myJson);
-    });
-})
+    .then(result => {
+      console.log(result);
+    })
+}
+
+formGroup.addEventListener('submit', showResult)
