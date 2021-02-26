@@ -1,4 +1,4 @@
-const key = '69948d6972b54434aa6d695020c2fcb5';
+const key = '81e4d675-03ba-4ac6-9aca-5acdb9ad4641';
 
 let formGroup = $_('.form-group');
 let input = $_('.input');
@@ -6,15 +6,16 @@ let input = $_('.input');
 
 function showResult(evt) {
   evt.preventDefault();
-  let url = `https://newsapi.org/v2/everything?q=${input.value}&apiKey=${key}`;
+  let url = `https://content.guardianapis.com/search?q=${input.value}&api-key=${key}`
 
-  console.log(url);
   fetch(url)
     .then(res => {
-      return res.json();
+      if (res.status === 200) {
+        return res.json();
+      }
     })
     .then(result => {
-      console.log(result);
+      console.log(result.response.results);
     })
 }
 
